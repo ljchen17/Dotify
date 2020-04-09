@@ -1,7 +1,7 @@
 ## INFO 448 HW 1 - Dotify Androiod App
 ### Lizzy Chen
 
-### 1. Briefly describes the app
+### A. Briefly describes the app
 Built on Andriod Stuido, this application aims to eventually provide musics from record labels and media companies. So far the application has a couple of functions developed as listed below:
 1. “Change Username” button that can change the username;
 2. “Apply” button that can record and present the username after changing the username;
@@ -9,10 +9,10 @@ Built on Andriod Stuido, this application aims to eventually provide musics from
 4. Display of the names of the artists
 
 
-### 2. List of extra credit you attempted
+### B. List of extra credit you attempted
 N/A
 
-### 3. Shows an photo or screenshot of your app running on a device/emulator
+### C. Shows an photo or screenshot of your app running on a device/emulator
 
 <img src="HW1.png" alt="hw1_diagram" style="zoom:75%;" />
 
