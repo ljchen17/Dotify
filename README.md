@@ -11,6 +11,7 @@ Built on Andriod Stuido, this application aims to eventually provide musics from
 N/A
 
 ## Shows an photo or screenshot of your app running on a device/emulator
+<img src="HW1.png" alt="hw1_diagram" style="zoom:75%;" />
 
 ## Optional: Any special set up/installation instructions or how to use the app
 N/A
