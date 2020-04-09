@@ -1,2 +1,2 @@
 # Dotify
-Andriod App development HW1
+Andriod App development Dotify
