@@ -1,2 +1,2 @@
-# andriod-app-development
-Andriod app development resources
+# Dotify
+Andriod App development HW1
