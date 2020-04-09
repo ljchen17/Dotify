@@ -11,7 +11,7 @@ Built on Andriod Stuido, this application aims to eventually provide musics from
 5. Display of the number of song plays. Note that when the app just starts, the number displayed would be a random number
 6. A Play Button. When a user clicks on play, it increases the number of plays displayed by one
 7. A Previous Button. When a user clicks on the previous button, it shows a brief message at the bottom of the screen saying “Skipping to previous track”
-8. A NEXT Button. When a user clicks on the previous button, it shows a brief message at the bottom of the screen saying “Skipping to next track”
+8. A Next Button. When a user clicks on the previous button, it shows a brief message at the bottom of the screen saying “Skipping to next track”
 
 
 ### B. List of extra credit you attempted
