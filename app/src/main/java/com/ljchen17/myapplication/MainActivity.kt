@@ -3,12 +3,11 @@ package com.ljchen17.myapplication
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
+import android.graphics.Color
+import kotlinx.android.synthetic.main.navigation.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,14 +15,36 @@ class MainActivity : AppCompatActivity() {
 
     var editMode = false
 
+    var imageColorEdit = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
         val playTimes = findViewById<TextView>(R.id.playTimes)
         playTimes.text = "$randomNumber plays"
 
+        val imageView = findViewById<ImageView>(R.id.cover)
+        imageView.setOnLongClickListener {
+            val currentSong = findViewById<TextView>(R.id.currentsong)
+            val artists = findViewById<TextView>(R.id.artists)
+            val playTimes = findViewById<TextView>(R.id.playTimes)
+            val userInputValue = findViewById<TextView>(R.id.userInputValue)
+
+            if (imageColorEdit) {
+                currentSong.setTextColor(Color.BLACK)
+                artists.setTextColor(Color.BLACK)
+                playTimes.setTextColor(Color.GRAY)
+                userInputValue.setTextColor(Color.GRAY)
+                imageColorEdit = false
+            } else {
+                currentSong.setTextColor(Color.BLUE)
+                artists.setTextColor(Color.BLUE)
+                playTimes.setTextColor(Color.BLUE)
+                userInputValue.setTextColor(Color.BLUE)
+                imageColorEdit = true
+            }
+            true
+        }
     }
 
 
