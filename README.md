@@ -16,7 +16,7 @@ Built on Andriod Stuido, this application aims to eventually provide musics from
 
 ### B. List of extra credit you attempted
 
-N/A
+Extra credit question 1.
 
 
 ### C. Shows an photo or screenshot of your app running on a device/emulator
