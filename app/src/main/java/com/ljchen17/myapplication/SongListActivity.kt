@@ -3,8 +3,10 @@ package com.ljchen17.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
@@ -24,6 +26,8 @@ class SongListActivity : AppCompatActivity() {
 
     private lateinit var currentSong: Song
 
+    private var allSongs: MutableList<Song> = SongDataProvider.getAllSongs() as MutableList<Song>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_song_list)
@@ -31,20 +35,21 @@ class SongListActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         rvMusic.layoutManager = linearLayoutManager
 
-
-        val allSongs: List<Song> = SongDataProvider.getAllSongs()
-
-        adapter = SongListAdapter(allSongs)
-
+        adapter = SongListAdapter(allSongs,this)
 
         // Set on item Click for the adapter
         adapter.onSongClickListener = { someSong: Song ->
             songNowPlaying(someSong)
         }
 
+        // Set on item Long Click for the adapter
+        adapter.onSongLongClickListener = { someSong: Song ->
+            removeItem(someSong)
+        }
+
         shuffleSongs.setOnClickListener {
             val newSong = allSongs.shuffled()
-            adapter.shuffleSongs(newSong)
+            adapter.shuffleSongs(newSong as MutableList<Song>)
         }
 
         rvMusic.adapter = adapter
@@ -58,9 +63,13 @@ class SongListActivity : AppCompatActivity() {
         miniPlayer.text = "${song.title} - ${song.artist}"
     }
 
+    fun removeItem(song: Song) {
+        val position = allSongs.indexOf(song)
+        allSongs.removeAt(position)
+        adapter.removeAt(position)
+    }
+
     fun enterMainPage(view: View) {
-       // do intent stufff
-       // currentSong.largeImageID
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra(SONG_IMAGE, currentSong.largeImageID)
         intent.putExtra(SONG_TITLE, currentSong.title)

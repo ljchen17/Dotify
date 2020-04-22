@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
         val playTimes = findViewById<TextView>(R.id.playTimes)
         playTimes.text = "$randomNumber plays"
 
@@ -121,6 +123,7 @@ class MainActivity : AppCompatActivity() {
         toast.show()
         toast.setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 0)
     }
+
 
     companion object {
         // Keys for intents
