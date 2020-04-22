@@ -12,9 +12,6 @@ import kotlinx.android.synthetic.main.item_song.view.*
 
 class SongListAdapter (private var listOfSongs: List<Song>): RecyclerView.Adapter<SongListAdapter.SongViewHolder>() {
 
-    //val songName = findViewById<TextView>(R.id.)
-    //playTimes.text = "$randomNumber plays"
-
     var onSongClickListener: ((song: Song) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {

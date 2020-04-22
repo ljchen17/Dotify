@@ -23,12 +23,25 @@ class MainActivity : AppCompatActivity() {
         val playTimes = findViewById<TextView>(R.id.playTimes)
         playTimes.text = "$randomNumber plays"
 
+        // Grab data from Intent's Extras
+        val songTitle = intent.getStringExtra(SONG_TITLE)
+        val songArtists = intent.getStringExtra(SONG_ARTIST)
+        val songImage = intent.getIntExtra(SONG_IMAGE,0)
+
         val imageView = findViewById<ImageView>(R.id.cover)
+        imageView.setImageResource(songImage)
+
+        val currentSong = findViewById<TextView>(R.id.currentsong)
+        val artists = findViewById<TextView>(R.id.artists)
+        currentSong.text = songTitle
+        artists.text = songArtists
+
         imageView.setOnLongClickListener {
             val currentSong = findViewById<TextView>(R.id.currentsong)
             val artists = findViewById<TextView>(R.id.artists)
             val playTimes = findViewById<TextView>(R.id.playTimes)
             val userInputValue = findViewById<TextView>(R.id.userInputValue)
+
 
             if (imageColorEdit) {
                 currentSong.setTextColor(Color.BLACK)
@@ -109,5 +122,11 @@ class MainActivity : AppCompatActivity() {
         toast.setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 0)
     }
 
+    companion object {
+        // Keys for intents
+        const val SONG_TITLE = "SONG_TITLE"
+        const val SONG_ARTIST = "SONG_ARTIST"
+        const val SONG_IMAGE = "SONG_IMAGE"
+    }
 
 }

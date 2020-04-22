@@ -20,14 +20,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:elevation="5dp">
 
         <TextView
             android:id="@+id/miniPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="17"
-            android:hint="Mini Player Bar"
+            android:onClick="enterMainPage"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/shuffleSongs"
             app:layout_constraintHorizontal_bias="0.5"
