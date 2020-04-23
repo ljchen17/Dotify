@@ -6,6 +6,6 @@
     <dimen name="cover_margintop">50dp</dimen>
     <dimen name="currentsong_margintop">361.5dp</dimen>
     <dimen name="artists_margintop">388dp</dimen>
-    <dimen name="playtimes_margintop">417dp</dimen>
+    <dimen name="playtimes_margintop">426dp</dimen>
     <dimen name="next_margintop">476dp</dimen>
 </resources>
