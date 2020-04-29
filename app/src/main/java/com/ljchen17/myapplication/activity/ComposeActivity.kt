@@ -23,7 +23,6 @@ class ComposeActivity : AppCompatActivity(), OnSongClickListener {
         super.onCreate(savedInstanceState)
         setContentView((R.layout.activity_compose))
 
-
         val songListFragment = SongListFragment()
 
         val argumentBundle = Bundle().apply {

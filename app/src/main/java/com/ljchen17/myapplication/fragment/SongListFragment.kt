@@ -75,8 +75,6 @@ class SongListFragment : Fragment() {
 
 
 
-        Log.e("JAMIE", "JAMIE ")
-
         linearLayoutManager = LinearLayoutManager(context)
 
         rvMusic.layoutManager = linearLayoutManager

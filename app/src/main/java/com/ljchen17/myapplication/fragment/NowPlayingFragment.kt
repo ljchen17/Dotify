@@ -15,7 +15,6 @@ import com.ericchee.songdataprovider.Song
 import com.ljchen17.myapplication.R
 import kotlinx.android.synthetic.main.item_song.*
 import kotlinx.android.synthetic.main.now_playing.*
-import kotlinx.android.synthetic.main.user_modification.*
 import kotlinx.android.synthetic.main.navigation.*
 import kotlin.random.Random
 
@@ -76,13 +75,11 @@ class NowPlayingFragment : Fragment() {
                 currentsong?.setTextColor(Color.BLACK)
                 artists.setTextColor(Color.BLACK)
                 playTimes.setTextColor(Color.GRAY)
-                userInputValue.setTextColor(Color.GRAY)
                 false
             } else {
                 currentsong.setTextColor(Color.BLUE)
                 artists.setTextColor(Color.BLUE)
                 playTimes.setTextColor(Color.BLUE)
-                userInputValue.setTextColor(Color.BLUE)
                 true
             }
             true
@@ -91,7 +88,7 @@ class NowPlayingFragment : Fragment() {
         currentsong.text = song!!.title
         artists.text = song!!.artist
 
-        changeUserName.setOnClickListener{
+        /**changeUserName.setOnClickListener{
 
             if (editMode) {
 
@@ -117,7 +114,7 @@ class NowPlayingFragment : Fragment() {
                 editMode = true
 
             }
-        }
+        }**/
 
         play.setOnClickListener {
             randomNumber += 1
