@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.ericchee.songdataprovider.Song
+import com.ljchen17.myapplication.fragment.SongListFragment
 
-class SongListAdapter (private var listOfSongs: MutableList<Song>, val context: Context): RecyclerView.Adapter<SongListAdapter.SongViewHolder>() {
+class SongListAdapter(private var listOfSongs: MutableList<Song>): RecyclerView.Adapter<SongListAdapter.SongViewHolder>() {
 
     var onSongClickListener: ((song: Song) -> Unit)? = null
 
@@ -63,11 +63,6 @@ class SongListAdapter (private var listOfSongs: MutableList<Song>, val context: 
                 onSongClickListener?.invoke(song)
             }
 
-            itemView.setOnLongClickListener {
-                Toast.makeText(context, "The song was deleted", Toast.LENGTH_SHORT).show()
-                onSongLongClickListener?.invoke(song)
-                true
-            }
 
         }
 
