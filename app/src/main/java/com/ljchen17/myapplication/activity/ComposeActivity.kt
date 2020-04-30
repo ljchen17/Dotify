@@ -1,6 +1,7 @@
 package com.ljchen17.myapplication.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -26,6 +27,7 @@ class ComposeActivity : AppCompatActivity(), OnSongClickListener {
         super.onCreate(savedInstanceState)
         setContentView((R.layout.activity_compose))
 
+
         if (savedInstanceState != null) {
 
                 with(savedInstanceState) {
@@ -41,22 +43,24 @@ class ComposeActivity : AppCompatActivity(), OnSongClickListener {
                 miniPlayerComponent.visibility = View.GONE
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            } else {supportActionBar?.setDisplayHomeAsUpEnabled(false)}
+            } else {
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+            }
 
         } else {
-
-            val songListFragment = SongListFragment()
 
             val argumentBundle = Bundle().apply {
                 val songList = SongDataProvider.getAllSongs()
                 putParcelableArrayList(SongListFragment.ARG_SONGLIST, ArrayList(songList))
             }
 
-            songListFragment.arguments = argumentBundle
+            val songListFragment = SongListFragment()
             val shuffleButton = findViewById<Button>(R.id.shuffleSongs)
             shuffleButton.setOnClickListener {
                 songListFragment.shuffleList()
             }
+            songListFragment.arguments = argumentBundle
 
             supportFragmentManager
                 .beginTransaction()
@@ -64,6 +68,16 @@ class ComposeActivity : AppCompatActivity(), OnSongClickListener {
                 .commit()
 
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        }
+
+        var songListFragment = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
+
+        if (songListFragment!=null) {
+
+             val shuffleButton = findViewById<Button>(R.id.shuffleSongs)
+            shuffleButton.setOnClickListener {
+                songListFragment.shuffleList()
+            }
         }
 
         supportFragmentManager.addOnBackStackChangedListener {
@@ -76,6 +90,7 @@ class ComposeActivity : AppCompatActivity(), OnSongClickListener {
 
                 var miniPlayerComponent = findViewById<ConstraintLayout>(R.id.miniPlayerComponent)
                 miniPlayerComponent.visibility = View.VISIBLE
+
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
             }
         }
