@@ -1,23 +1,24 @@
 package com.ljchen17.myapplication.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.ericchee.songdataprovider.Song
-import com.ericchee.songdataprovider.SongDataProvider
 import com.ljchen17.myapplication.R
+import com.ljchen17.myapplication.data.MusicApplication
+import com.ljchen17.myapplication.data.model.SongDetails
 import com.ljchen17.myapplication.fragment.NowPlayingFragment
 import com.ljchen17.myapplication.fragment.OnSongClickListener
 import com.ljchen17.myapplication.fragment.SongListFragment
+import com.ljchen17.myapplication.fragment.SongListFragment.Companion.ARG_SONGLIST
 
 
 class ComposeActivity : AppCompatActivity(), OnSongClickListener {
 
-    private var currentSong : Song? = null
+    private var currentSong : SongDetails? = null
 
     companion object {
         val STATE_SONG = "currentSong"
@@ -26,7 +27,6 @@ class ComposeActivity : AppCompatActivity(), OnSongClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView((R.layout.activity_compose))
-
 
         if (savedInstanceState != null) {
 
@@ -50,24 +50,40 @@ class ComposeActivity : AppCompatActivity(), OnSongClickListener {
 
         } else {
 
-            val argumentBundle = Bundle().apply {
-                val songList = SongDataProvider.getAllSongs()
-                putParcelableArrayList(SongListFragment.ARG_SONGLIST, ArrayList(songList))
-            }
 
-            val songListFragment = SongListFragment()
-            val shuffleButton = findViewById<Button>(R.id.shuffleSongs)
-            shuffleButton.setOnClickListener {
-                songListFragment.shuffleList()
-            }
-            songListFragment.arguments = argumentBundle
 
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragContainer, songListFragment,SongListFragment.TAG)
-                .commit()
+            val apiManager = (application as MusicApplication).apiManager
 
-            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            apiManager.getSongsList ({ allSongs ->
+
+                val songList = allSongs.songs
+
+                val argumentBundle = Bundle().apply {
+                   putParcelableArrayList(ARG_SONGLIST, ArrayList(songList))
+                }
+
+                val songListFragment = SongListFragment()
+
+                val shuffleButton = findViewById<Button>(R.id.shuffleSongs)
+                shuffleButton.setOnClickListener {
+                    songListFragment.shuffleList()
+                }
+                songListFragment.arguments = argumentBundle
+
+                supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragContainer, songListFragment,SongListFragment.TAG)
+                    .commit()
+
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+            },
+                {
+                    Toast.makeText(this, "errror ", Toast.LENGTH_SHORT).show()
+                })
+
+
+
         }
 
         var songListFragment = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
@@ -138,7 +154,7 @@ class ComposeActivity : AppCompatActivity(), OnSongClickListener {
         }
     }
 
-    override fun onSongClicked(song:Song) {
+    override fun onSongClicked(song:SongDetails) {
 
         currentSong = song
         setMiniDisplay()

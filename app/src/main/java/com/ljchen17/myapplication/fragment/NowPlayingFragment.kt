@@ -1,5 +1,6 @@
 package com.ljchen17.myapplication.fragment
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -8,20 +9,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.ericchee.songdataprovider.Song
 import com.ljchen17.myapplication.R
+import com.ljchen17.myapplication.data.MusicApplication
+import com.ljchen17.myapplication.data.MusicManager
+import com.ljchen17.myapplication.data.model.SongDetails
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.now_playing.*
 import kotlinx.android.synthetic.main.navigation.*
-import kotlin.random.Random
 
 /**
  * A simple [Fragment] subclass.
  */
 class NowPlayingFragment : Fragment() {
 
-    var randomNumber = Random.nextInt(1000, 10000)
+    lateinit var musicManager: MusicManager
+
     var imageColorEdit = false
-    private var song: Song? = null
+    private var song: SongDetails? = null
 
     companion object {
 
@@ -35,20 +39,20 @@ class NowPlayingFragment : Fragment() {
 
         if (savedInstanceState != null) {
             with(savedInstanceState) {
-                randomNumber = getInt(NowPlayingFragment.PLAY_TIMES)
+                musicManager.playTimes = getInt(NowPlayingFragment.PLAY_TIMES)
                 setPlayTimes()
             }
         }
 
         arguments?.let { args ->
-            val song = args.getParcelable<Song>(ARG_SONG)
+            val song = args.getParcelable<SongDetails>(ARG_SONG)
             if (song != null) {
                 this.song = song
             }
         }
     }
 
-    fun updateSong(song: Song?) {
+    fun updateSong(song: SongDetails?) {
         this.song = song
         updateSongViews()
     }
@@ -60,6 +64,15 @@ class NowPlayingFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_now_playing, container, false)
     }
 
+    override fun onAttach(context: Context?) {
+
+        super.onAttach(context)
+
+        val musicApp = context?.applicationContext as MusicApplication
+
+        musicManager = musicApp.musicManager
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         updateSongViews()
@@ -68,15 +81,15 @@ class NowPlayingFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
 
         outState?.run {
-            putInt(PLAY_TIMES, randomNumber)
+            putInt(PLAY_TIMES, musicManager.playTimes)
         }
         super.onSaveInstanceState(outState)
     }
 
     private fun updateSongViews() {
         song?.let {
-            playTimes?.text = "$randomNumber plays"
-            cover?.setImageResource(song!!.largeImageID)
+            playTimes?.text = "${musicManager.playTimes} plays"
+            Picasso.get().load(song!!.largeImageURL).into(cover)
 
             cover.setOnLongClickListener {
 
@@ -98,8 +111,8 @@ class NowPlayingFragment : Fragment() {
             artists.text = song!!.artist
 
             play.setOnClickListener {
-                randomNumber += 1
-                playTimes.text = "$randomNumber plays"
+                musicManager.playTimes += 1
+                playTimes.text = "${musicManager.playTimes} plays"
             }
 
             previous.setOnClickListener {
@@ -121,6 +134,6 @@ class NowPlayingFragment : Fragment() {
     }
 
     fun setPlayTimes() {
-        playTimes?.text = "$randomNumber plays"
+        playTimes?.text = "${musicManager.playTimes} plays"
     }
 }

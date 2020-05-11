@@ -1,10 +1,10 @@
-## INFO 448 HW 3 - Dotify Androiod App
+## INFO 448 HW 4 - Dotify Androiod App
 ### Lizzy Chen
 
 ### A. Briefly describes the app
 
 Built on Andriod Stuido, this application aims to eventually provide musics from record labels and media companies. So far the application has a couple of functions developed as listed below:
-1. A list of songs' names, artists and album icons (small album image) when initialzing the app
+1. When initializing the app, the app will send an HTTP GET request to some url and receive the data provided. With the data, the app will show a list of songs' names, artists and album icons (small album image)
 
 2. “Shuffle” button that can shuffle the order the list when clicked
 
@@ -31,13 +31,15 @@ Built on Andriod Stuido, this application aims to eventually provide musics from
 
 ### B. Shows photos or screenshots of your app running on a device/emulator
 
-<img src="HW3_1.png" alt="hw2_diagram" style="zoom:75%;" />
+<img src="HW4_1.png" alt="hw4_diagram" style="zoom:75%;" />
 
-<img src="HW3_2.png" alt="hw2_diagram" style="zoom:75%;" />
+<img src="HW4_2.png" alt="hw4_diagram" style="zoom:75%;" />
 
-<img src="HW3_3.png" alt="hw2_diagram" style="zoom:75%;" />
+<img src="HW4_3.png" alt="hw4_diagram" style="zoom:75%;" />
 
-<img src="HW3_4.png" alt="hw2_diagram" style="zoom:75%;" />
+<img src="HW4_4.png" alt="hw4_diagram" style="zoom:75%;" />
+
+<img src="HW4_5.png" alt="hw4_diagram" style="zoom:75%;" />
 
 ### Optional: Any special set up/installation instructions or how to use the app
 

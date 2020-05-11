@@ -8,9 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ericchee.songdataprovider.Song
 import com.ljchen17.myapplication.R
 import com.ljchen17.myapplication.SongListAdapter
+import com.ljchen17.myapplication.data.model.SongDetails
 import kotlinx.android.synthetic.main.fragment_song_list.*
 
 /**
@@ -21,7 +21,7 @@ class SongListFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: SongListAdapter
     private var OnSongClickListener: OnSongClickListener? = null
-    private var allSongs: MutableList<Song> = ArrayList<Song>()
+    private var allSongs: MutableList<SongDetails> = ArrayList<SongDetails>()
 
     companion object {
         val TAG: String = SongListFragment::class.java.simpleName
@@ -32,9 +32,9 @@ class SongListFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let { args ->
-            val songlist = args.getParcelableArrayList<Song>(ARG_SONGLIST)
+            val songlist = args.getParcelableArrayList<SongDetails>(ARG_SONGLIST)
             if (songlist != null) {
-                this.allSongs = songlist.toList() as MutableList<Song>
+                this.allSongs = songlist.toList() as MutableList<SongDetails>
             }
         }
     }
@@ -48,7 +48,7 @@ class SongListFragment : Fragment() {
 
     fun shuffleList() {
         var newSong = allSongs.shuffled()
-        adapter.shuffleList(newSong as MutableList<Song>)
+        adapter.shuffleList(newSong as MutableList<SongDetails>)
     }
 
     override fun onCreateView(
@@ -65,7 +65,7 @@ class SongListFragment : Fragment() {
         rvMusic.layoutManager = linearLayoutManager
         adapter = SongListAdapter(allSongs)
 
-        adapter.onSongClickListener = { someSong: Song ->
+        adapter.onSongClickListener = { someSong: SongDetails ->
             OnSongClickListener?.onSongClicked(someSong)
         }
 
@@ -75,5 +75,5 @@ class SongListFragment : Fragment() {
 }
 
 interface OnSongClickListener{
-    fun onSongClicked(song: Song)
+    fun onSongClicked(song: SongDetails)
 }

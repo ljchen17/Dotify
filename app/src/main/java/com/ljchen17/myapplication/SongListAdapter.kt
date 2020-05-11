@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ericchee.songdataprovider.Song
+import com.ljchen17.myapplication.data.model.SongDetails
+import com.squareup.picasso.Picasso
 
-class SongListAdapter(private var listOfSongs: MutableList<Song>): RecyclerView.Adapter<SongListAdapter.SongViewHolder>() {
+class SongListAdapter(private var listOfSongs: MutableList<SongDetails>): RecyclerView.Adapter<SongListAdapter.SongViewHolder>() {
 
-    var onSongClickListener: ((song: Song) -> Unit)? = null
+    var onSongClickListener: ((song: SongDetails) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
 
@@ -27,7 +28,7 @@ class SongListAdapter(private var listOfSongs: MutableList<Song>): RecyclerView.
         holder.bindView(song)
     }
 
-    fun shuffleList(newSong: MutableList<Song>) {
+    fun shuffleList(newSong: MutableList<SongDetails>) {
         listOfSongs = newSong
         notifyDataSetChanged()
     }
@@ -38,11 +39,11 @@ class SongListAdapter(private var listOfSongs: MutableList<Song>): RecyclerView.
         private val songArtist by lazy {itemView.findViewById<TextView>(R.id.songArtist)}
         private val songImage by lazy {itemView.findViewById<ImageView>(R.id.ivSongImage)}
 
-        fun bindView (song: Song) {
-
+        fun bindView (song: SongDetails) {
             songTitle.text = song.title
             songArtist.text = song.artist
-            songImage.setImageResource(song.smallImageID)
+            Picasso.get().load(song.smallImageURL).into(songImage)
+            //songImage.setImageResource(song.smallImageID)
 
             itemView.setOnClickListener {
                 onSongClickListener?.invoke(song)
